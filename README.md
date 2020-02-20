@@ -1,0 +1,3 @@
+# mangohud
+
+The mangohud package
