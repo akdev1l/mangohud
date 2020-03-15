@@ -56,7 +56,9 @@ mv imgui-%{commit1}/* modules/ImGui/src/
 %files
 %license LICENSE
 %doc README.md bin/%{appname}.conf
+%ifarch x86_64
 %{_bindir}/%{name}
+%endif
 %{_datadir}/vulkan/implicit_layer.d/%{appname}*.json
 %{_docdir}/%{name}/%{appname}.conf.example
 %{_libdir}/%{name}/
