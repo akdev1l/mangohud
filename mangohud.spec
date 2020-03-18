@@ -13,6 +13,7 @@ Name:           mangohud
 Version:        0.3.1
 Release:        1%{?dist}
 Summary:        Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more
+ExclusiveArch:  x86_64 i686
 
 License:        MIT
 URL:            https://github.com/flightlessmango/MangoHud
