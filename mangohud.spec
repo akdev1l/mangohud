@@ -11,7 +11,7 @@
 
 Name:           mangohud
 Version:        0.3.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more
 ExclusiveArch:  x86_64 i686
 
@@ -32,11 +32,17 @@ BuildRequires:  pkgconfig(x11)
 
 Requires:       vulkan-loader%{?_isa}
 
+Suggests:       goverlay
+
 Provides:       bundled(ImGui) = 0~git%{shortcommit1}
 
 %description
 A modification of the Mesa Vulkan overlay. Including GUI improvements,
 temperature reporting, and logging capabilities.
+
+To install GUI front-end:
+
+  sudo dnf install goverlay
 
 
 %prep
@@ -64,6 +70,9 @@ mv imgui-%{commit1}/* modules/ImGui/src/
 
 
 %changelog
+* Thu Mar 26 2020 Artem Polishchuk <ego.cordatus@gmail.com> - 0.3.1-2
+- Add GUI fron-end 'goverlay' as very weak dep
+
 * Wed Mar 18 2020 Artem Polishchuk <ego.cordatus@gmail.com> - 0.3.1-1
 - Update to 0.3.1
 
