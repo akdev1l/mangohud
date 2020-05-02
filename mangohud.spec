@@ -4,22 +4,22 @@
 
 # Git submodules
 # * ImGui
-%global commit1         96a2c4619b0c8009f684556683b2e1b6408bb0dc
+%global commit1         1f02d240b38f445abb0381ade0867752d5d2bc7b
 %global shortcommit1    %(c=%{commit1}; echo ${c:0:7})
 
 %global appname MangoHud
 
 Name:           mangohud
-Version:        0.3.1
-Release:        2%{?dist}
+Version:        0.3.5
+Release:        1%{?dist}
 Summary:        Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more
-ExclusiveArch:  x86_64 i686
 
 License:        MIT
 URL:            https://github.com/flightlessmango/MangoHud
 Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:        https://github.com/flightlessmango/ImGui/archive/%{commit1}/ImGui-%{shortcommit1}.tar.gz
 
+BuildRequires:  dbus-devel
 BuildRequires:  desktop-file-utils
 BuildRequires:  gcc-c++
 BuildRequires:  git-core
@@ -52,7 +52,9 @@ mv imgui-%{commit1}/* modules/ImGui/src/
 
 
 %build
-%meson -Duse_system_vulkan=enabled
+%meson \
+    -Duse_system_vulkan=enabled \
+    -Dwith_xnvctrl=disabled
 %meson_build
 
 
@@ -70,6 +72,10 @@ mv imgui-%{commit1}/* modules/ImGui/src/
 
 
 %changelog
+* Sat May 02 2020 Artem Polishchuk <ego.cordatus@gmail.com> - 0.3.5-1
+- Update to 0.3.5
+- Remove ExclusiveArch. Now compiles on all arches, see GitHub#88.
+
 * Thu Mar 26 2020 Artem Polishchuk <ego.cordatus@gmail.com> - 0.3.1-2
 - Add GUI fron-end 'goverlay' as very weak dep
 
