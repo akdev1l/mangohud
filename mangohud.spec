@@ -1,23 +1,19 @@
-# LTO
-%global optflags        %{optflags} -flto
-%global build_ldflags   %{build_ldflags} -flto
-
 # Git submodules
 # * ImGui
-%global commit1         1f02d240b38f445abb0381ade0867752d5d2bc7b
-%global shortcommit1    %(c=%{commit1}; echo ${c:0:7})
+%global commit 1f02d240b38f445abb0381ade0867752d5d2bc7b
+%global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 %global appname MangoHud
 
 Name:           mangohud
-Version:        0.3.5
+Version:        0.4.1
 Release:        1%{?dist}
 Summary:        Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more
 
 License:        MIT
 URL:            https://github.com/flightlessmango/MangoHud
 Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
-Source1:        https://github.com/flightlessmango/ImGui/archive/%{commit1}/ImGui-%{shortcommit1}.tar.gz
+Source1:        https://github.com/flightlessmango/ImGui/archive/%{commit}/ImGui-%{shortcommit}.tar.gz
 
 BuildRequires:  dbus-devel
 BuildRequires:  desktop-file-utils
@@ -34,7 +30,7 @@ Requires:       vulkan-loader%{?_isa}
 
 Suggests:       goverlay
 
-Provides:       bundled(ImGui) = 0~git%{shortcommit1}
+Provides:       bundled(ImGui) = 0~git%{shortcommit}
 
 %description
 A modification of the Mesa Vulkan overlay. Including GUI improvements,
@@ -48,7 +44,7 @@ To install GUI front-end:
 %prep
 %setup -n %{appname}-%{version} -q
 %setup -n %{appname}-%{version} -q -D -T -a1
-mv imgui-%{commit1}/* modules/ImGui/src/
+mv imgui-%{commit}/* modules/ImGui/src/
 
 
 %build
@@ -72,6 +68,10 @@ mv imgui-%{commit1}/* modules/ImGui/src/
 
 
 %changelog
+* Thu Jun 11 2020 Artem Polishchuk <ego.cordatus@gmail.com> - 0.4.1-1
+- Update to 0.4.1
+- Disable LTO
+
 * Sat May 02 2020 Artem Polishchuk <ego.cordatus@gmail.com> - 0.3.5-1
 - Update to 0.3.5
 - Remove ExclusiveArch. Now compiles on all arches, see GitHub#88.
