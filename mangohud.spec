@@ -14,6 +14,7 @@ License:        MIT
 URL:            https://github.com/flightlessmango/MangoHud
 Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:        https://github.com/flightlessmango/ImGui/archive/%{commit}/ImGui-%{shortcommit}.tar.gz
+Patch0:         https://github.com/flightlessmango/MangoHud/pull/208.patch#/fix-wformat-security-warning-with-gcc-10.1.patch
 
 BuildRequires:  dbus-devel
 BuildRequires:  desktop-file-utils
@@ -44,6 +45,7 @@ To install GUI front-end:
 %prep
 %setup -n %{appname}-%{version} -q
 %setup -n %{appname}-%{version} -q -D -T -a1
+%patch0 -p1
 mv imgui-%{commit}/* modules/ImGui/src/
 
 
