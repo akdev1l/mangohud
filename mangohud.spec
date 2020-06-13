@@ -7,7 +7,7 @@
 
 Name:           mangohud
 Version:        0.4.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more
 
 License:        MIT
@@ -15,6 +15,9 @@ URL:            https://github.com/flightlessmango/MangoHud
 Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
 Source1:        https://github.com/flightlessmango/ImGui/archive/%{commit}/ImGui-%{shortcommit}.tar.gz
 Patch0:         https://github.com/flightlessmango/MangoHud/pull/208.patch#/fix-wformat-security-warning-with-gcc-10.1.patch
+
+# https://github.com/flightlessmango/MangoHud/issues/213
+Patch1:         https://github.com/flightlessmango/MangoHud/commit/db070816174b4b84d0859ac5e29ef71520376d01.patch#/use-xml.etree.elementtree.patch
 
 BuildRequires:  dbus-devel
 BuildRequires:  desktop-file-utils
@@ -46,6 +49,7 @@ To install GUI front-end:
 %setup -n %{appname}-%{version} -q
 %setup -n %{appname}-%{version} -q -D -T -a1
 %patch0 -p1
+%patch1 -p1
 mv imgui-%{commit}/* modules/ImGui/src/
 
 
@@ -70,6 +74,9 @@ mv imgui-%{commit}/* modules/ImGui/src/
 
 
 %changelog
+* Sat Jun 13 2020 Artem Polishchuk <ego.cordatus@gmail.com> - 0.4.1-2
+- Add patch which fix F33 build | GH-213
+
 * Thu Jun 11 2020 Artem Polishchuk <ego.cordatus@gmail.com> - 0.4.1-1
 - Update to 0.4.1
 - Disable LTO

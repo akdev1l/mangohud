@@ -1,0 +1,22 @@
+From db070816174b4b84d0859ac5e29ef71520376d01 Mon Sep 17 00:00:00 2001
+From: jackun <jack.un@gmail.com>
+Date: Sat, 13 Jun 2020 17:44:20 +0300
+Subject: [PATCH] Use xml.etree.ElementTree
+
+---
+ bin/gen_enum_to_str.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/bin/gen_enum_to_str.py b/bin/gen_enum_to_str.py
+index 2f2a7f1..81a84e4 100644
+--- a/bin/gen_enum_to_str.py
++++ b/bin/gen_enum_to_str.py
+@@ -25,7 +25,7 @@
+ import argparse
+ import os
+ import textwrap
+-import xml.etree.cElementTree as et
++import xml.etree.ElementTree as et
+ 
+ from mako.template import Template
+ 
