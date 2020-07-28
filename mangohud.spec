@@ -7,7 +7,7 @@
 
 Name:           mangohud
 Version:        0.4.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more
 
 License:        MIT
@@ -74,6 +74,9 @@ mv imgui-%{commit}/* modules/ImGui/src/
 
 
 %changelog
+* Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.4.1-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
 * Sat Jun 13 2020 Artem Polishchuk <ego.cordatus@gmail.com> - 0.4.1-2
 - Add patch which fix F33 build | GH-213
 
