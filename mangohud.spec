@@ -1,23 +1,13 @@
-# Git submodules
-# * ImGui
-%global commit 1f02d240b38f445abb0381ade0867752d5d2bc7b
-%global shortcommit %(c=%{commit}; echo ${c:0:7})
-
 %global appname MangoHud
 
 Name:           mangohud
-Version:        0.4.1
-Release:        3%{?dist}
+Version:        0.5.1
+Release:        1%{?dist}
 Summary:        Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more
 
 License:        MIT
 URL:            https://github.com/flightlessmango/MangoHud
 Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
-Source1:        https://github.com/flightlessmango/ImGui/archive/%{commit}/ImGui-%{shortcommit}.tar.gz
-Patch0:         https://github.com/flightlessmango/MangoHud/pull/208.patch#/fix-wformat-security-warning-with-gcc-10.1.patch
-
-# https://github.com/flightlessmango/MangoHud/issues/213
-Patch1:         https://github.com/flightlessmango/MangoHud/commit/db070816174b4b84d0859ac5e29ef71520376d01.patch#/use-xml.etree.elementtree.patch
 
 BuildRequires:  dbus-devel
 BuildRequires:  desktop-file-utils
@@ -34,7 +24,7 @@ Requires:       vulkan-loader%{?_isa}
 
 Suggests:       goverlay
 
-Provides:       bundled(ImGui) = 0~git%{shortcommit}
+Provides:       bundled(imgui)
 
 %description
 A modification of the Mesa Vulkan overlay. Including GUI improvements,
@@ -46,11 +36,7 @@ To install GUI front-end:
 
 
 %prep
-%setup -n %{appname}-%{version} -q
-%setup -n %{appname}-%{version} -q -D -T -a1
-%patch0 -p1
-%patch1 -p1
-mv imgui-%{commit}/* modules/ImGui/src/
+%autosetup -n %{appname}-%{version} -p1
 
 
 %build
@@ -71,9 +57,13 @@ mv imgui-%{commit}/* modules/ImGui/src/
 %{_datadir}/vulkan/implicit_layer.d/%{appname}*.json
 %{_docdir}/%{name}/%{appname}.conf.example
 %{_libdir}/%{name}/
+%{_mandir}/man1/%{name}.1*
 
 
 %changelog
+* Sun Aug 16 2020 Artem Polishchuk <ego.cordatus@gmail.com> - 0.5.1-1
+- Update to 0.5.1
+
 * Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.4.1-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
