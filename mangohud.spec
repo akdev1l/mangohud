@@ -1,7 +1,7 @@
 %global appname MangoHud
 
 Name:           mangohud
-Version:        0.5.1
+Version:        0.6.0
 Release:        1%{?dist}
 Summary:        Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more
 
@@ -61,6 +61,9 @@ To install GUI front-end:
 
 
 %changelog
+* Sat Nov 28 2020 Artem Polishchuk <ego.cordatus@gmail.com> - 0.6.0-1
+- build(update): 0.6.0
+
 * Sun Aug 16 2020 Artem Polishchuk <ego.cordatus@gmail.com> - 0.5.1-1
 - Update to 0.5.1
 
