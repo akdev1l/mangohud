@@ -1,8 +1,8 @@
 %global appname MangoHud
 
 Name:           mangohud
-Version:        0.6.0
-Release:        2%{?dist}
+Version:        0.6.1
+Release:        1%{?dist}
 Summary:        Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more
 
 License:        MIT
@@ -39,7 +39,7 @@ To install GUI front-end:
 %autosetup -n %{appname}-%{version} -p1
 
 # https://github.com/flightlessmango/MangoHud/issues/411
-sed -i 's|@VCS_TAG@|%{version}|' \
+sed -i 's|@VCS_TAG@|v%{version}|' \
     version.h.in
 
 
@@ -65,6 +65,9 @@ sed -i 's|@VCS_TAG@|%{version}|' \
 
 
 %changelog
+* Sun Nov 29 2020 Artem Polishchuk <ego.cordatus@gmail.com> - 0.6.1-1
+- build(update): 0.6.1
+
 * Sun Nov 29 2020 Artem Polishchuk <ego.cordatus@gmail.com> - 0.6.0-2
 - fix: version in HUD | GH-411
 
