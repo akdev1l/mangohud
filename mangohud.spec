@@ -2,7 +2,7 @@
 
 Name:           mangohud
 Version:        0.6.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more
 
 License:        MIT
@@ -65,6 +65,9 @@ sed -i 's|@VCS_TAG@|v%{version}|' \
 
 
 %changelog
+* Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 0.6.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
 * Sun Nov 29 2020 Artem Polishchuk <ego.cordatus@gmail.com> - 0.6.1-1
 - build(update): 0.6.1
 
