@@ -2,7 +2,7 @@
 
 Name:           mangohud
 Version:        0.6.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more
 
 License:        MIT
@@ -21,6 +21,8 @@ BuildRequires:  pkgconfig(vulkan)
 BuildRequires:  pkgconfig(x11)
 
 Requires:       vulkan-loader%{?_isa}
+
+Recommends:     (mangohud.i686 if glibc.i686)
 
 Suggests:       goverlay
 
@@ -65,6 +67,10 @@ sed -i 's|@VCS_TAG@|v%{version}|' \
 
 
 %changelog
+* Wed Jan 27 2021 Artem Polishchuk <ego.cordatus@gmail.com> - 0.6.1-3
+- build: Install 32-bit version automagically if multilib packages already
+  installed on end user machine
+
 * Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 0.6.1-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
