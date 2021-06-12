@@ -1,13 +1,18 @@
 %global appname MangoHud
 
+%global imgui_ver       1.81
+%global imgui_wrap_ver  1
+
 Name:           mangohud
-Version:        0.6.1
-Release:        3%{?dist}
+Version:        0.6.3
+Release:        1%{?dist}
 Summary:        Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more
 
 License:        MIT
 URL:            https://github.com/flightlessmango/MangoHud
 Source0:        %{url}/archive/v%{version}/%{name}-%{version}.tar.gz
+Source1:        https://github.com/ocornut/imgui/archive/v%{imgui_ver}/imgui-%{imgui_ver}.tar.gz
+Source2:        https://wrapdb.mesonbuild.com/v1/projects/imgui/%{imgui_ver}/%{imgui_wrap_ver}/get_zip#/imgui-%{imgui_ver}-%{imgui_wrap_ver}-wrap.zip
 
 BuildRequires:  dbus-devel
 BuildRequires:  desktop-file-utils
@@ -17,6 +22,7 @@ BuildRequires:  glslang-devel
 BuildRequires:  mesa-libGL-devel
 BuildRequires:  meson
 BuildRequires:  python3-mako
+
 BuildRequires:  pkgconfig(vulkan)
 BuildRequires:  pkgconfig(x11)
 
@@ -39,6 +45,11 @@ To install GUI front-end:
 
 %prep
 %autosetup -n %{appname}-%{version} -p1
+%autosetup -n %{appname}-%{version} -DTa1
+%autosetup -n %{appname}-%{version} -DTa2
+
+mkdir subprojects/imgui
+mv imgui-%{imgui_ver}/* subprojects/imgui/
 
 # https://github.com/flightlessmango/MangoHud/issues/411
 sed -i 's|@VCS_TAG@|v%{version}|' \
@@ -67,6 +78,12 @@ sed -i 's|@VCS_TAG@|v%{version}|' \
 
 
 %changelog
+* Sat Jun 12 2021 Artem Polishchuk <ego.cordatus@gmail.com> - 0.6.3-1
+- build(update): 0.6.3
+
+* Fri Jun 11 2021 Artem Polishchuk <ego.cordatus@gmail.com> - 0.6.2-1
+- build(update): 0.6.2
+
 * Wed Jan 27 2021 Artem Polishchuk <ego.cordatus@gmail.com> - 0.6.1-3
 - build: Install 32-bit version automagically if multilib packages already
   installed on end user machine
