@@ -4,7 +4,7 @@
 %global imgui_wrap_ver  1
 
 Name:           mangohud
-Version:        0.6.3
+Version:        0.6.4
 Release:        1%{?dist}
 Summary:        Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more
 
@@ -78,6 +78,9 @@ sed -i 's|@VCS_TAG@|v%{version}|' \
 
 
 %changelog
+* Thu Jun 24 2021 Artem Polishchuk <ego.cordatus@gmail.com> - 0.6.4-1
+- build(update): 0.6.4
+
 * Sat Jun 12 2021 Artem Polishchuk <ego.cordatus@gmail.com> - 0.6.3-1
 - build(update): 0.6.3
 
