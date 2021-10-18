@@ -4,8 +4,8 @@
 %global imgui_wrap_ver  1
 
 Name:           mangohud
-Version:        0.6.5
-Release:        3%{?dist}
+Version:        0.6.6
+Release:        1%{?dist}
 Summary:        Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more
 
 License:        MIT
@@ -18,10 +18,13 @@ BuildRequires:  dbus-devel
 BuildRequires:  desktop-file-utils
 BuildRequires:  gcc-c++
 BuildRequires:  git-core
+BuildRequires:  glew-devel
+BuildRequires:  glfw-devel
 BuildRequires:  glslang-devel
 BuildRequires:  mesa-libGL-devel
 BuildRequires:  meson
 BuildRequires:  python3-mako
+BuildRequires:  spdlog-devel
 
 BuildRequires:  pkgconfig(vulkan)
 BuildRequires:  pkgconfig(x11)
@@ -58,8 +61,10 @@ sed -i 's|@VCS_TAG@|v%{version}|' \
 
 %build
 %meson \
+    -Duse_system_spdlog=enabled \
     -Duse_system_vulkan=enabled \
-    -Dwith_xnvctrl=disabled
+    -Dwith_xnvctrl=disabled \
+    %{nil}
 %meson_build
 
 
@@ -78,6 +83,9 @@ sed -i 's|@VCS_TAG@|v%{version}|' \
 
 
 %changelog
+* Mon Oct 18 2021 Artem Polishchuk <ego.cordatus@gmail.com> - 0.6.6-1
+- chore(update): 0.6.6
+
 * Thu Oct 07 2021 Artem Polishchuk <ego.cordatus@gmail.com> - 0.6.5-3
 - build: Fix multilib dep | rh#1830718
 
