@@ -35,7 +35,7 @@ Recommends:     (mangohud(x86-32) if glibc(x86-32))
 
 Suggests:       goverlay
 
-Provides:       bundled(imgui)
+Provides:       bundled(imgui) = %{imgui_ver}
 
 %description
 A modification of the Mesa Vulkan overlay. Including GUI improvements,
