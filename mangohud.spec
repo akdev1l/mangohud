@@ -4,8 +4,8 @@
 %global imgui_wrap_ver  1
 
 Name:           mangohud
-Version:        0.6.6
-Release:        2%{?dist}
+Version:        0.6.7
+Release:        1%{?dist}
 Summary:        Vulkan overlay layer for monitoring FPS, temperatures, CPU/GPU load and more
 
 License:        MIT
@@ -54,10 +54,6 @@ To install GUI front-end:
 mkdir subprojects/imgui
 mv imgui-%{imgui_ver}/* subprojects/imgui/
 
-# https://github.com/flightlessmango/MangoHud/issues/411
-sed -i 's|@VCS_TAG@|v%{version}|' \
-    version.h.in
-
 
 %build
 %meson \
@@ -76,13 +72,16 @@ sed -i 's|@VCS_TAG@|v%{version}|' \
 %license LICENSE
 %doc README.md bin/%{appname}.conf
 %{_bindir}/%{name}*
-%{_datadir}/vulkan/implicit_layer.d/%{appname}*.json
+%{_datadir}/vulkan/implicit_layer.d/*Mango*.json
 %{_docdir}/%{name}/%{appname}.conf.example
 %{_libdir}/%{name}/
 %{_mandir}/man1/%{name}.1*
 
 
 %changelog
+* Wed May 04 2022 Artem Polishchuk <ego.cordatus@gmail.com> - 0.6.7-1
+- chore(update): 0.6.7
+
 * Thu Jan 20 2022 Fedora Release Engineering <releng@fedoraproject.org> - 0.6.6-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
