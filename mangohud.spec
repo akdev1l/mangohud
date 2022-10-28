@@ -21,6 +21,7 @@ BuildRequires:  git-core
 BuildRequires:  glew-devel
 BuildRequires:  glfw-devel
 BuildRequires:  glslang-devel
+BuildRequires:  json-devel
 BuildRequires:  libappstream-glib
 BuildRequires:  mesa-libGL-devel
 BuildRequires:  meson >= 0.60
@@ -65,6 +66,7 @@ mv imgui-%{imgui_ver}/* subprojects/imgui/
     -Duse_system_spdlog=enabled \
     -Duse_system_vulkan=enabled \
     -Dwith_xnvctrl=disabled \
+    -Dmangoapp=true \
     %{nil}
 %meson_build
 
@@ -77,6 +79,15 @@ mv imgui-%{imgui_ver}/* subprojects/imgui/
 # https://github.com/flightlessmango/MangoHud/issues/812
 %dnl appstream-util validate-relax --nonet %{buildroot}%{_metainfodir}/*.xml
 
+%package -n mangoapp
+Summary: transparent OpenGL application to enable mangohud usage inside gamescope
+
+%description -n mangoapp
+Summary: transparent OpenGL application to enable mangohud usage inside gamescope
+
+%files -n mangoapp
+%{_bindir}/mangoapp*
+%{_mandir}/man1/mangoapp.1*
 
 %files
 %license LICENSE
@@ -88,7 +99,6 @@ mv imgui-%{imgui_ver}/* subprojects/imgui/
 %{_libdir}/%{name}/
 %{_mandir}/man1/%{name}.1*
 %{_metainfodir}/*.metainfo.xml
-
 
 %changelog
 %autochangelog
